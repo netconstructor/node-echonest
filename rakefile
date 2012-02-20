@@ -35,3 +35,7 @@ SRC.each do |srccoffee|
     end
 end
 
+desc "publish to npm"
+task :publish => [:build] do
+    sh "npm publish"
+end
