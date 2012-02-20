@@ -30,3 +30,17 @@ module.exports =
     'track/analyze': post: {}
     'track/profile': get: {}
     'track/upload': post: {}
+
+    'playlist/basic': get: {}
+    'playlist/static': get: {}
+    'playlist/dynamic': get: {}
+    'playlist/session_info': get: {}
+
+    'catalog/create': post: {}
+    'catalog/update': post: {}
+    'catalog/status': get: {}
+    'catalog/profile': get: {}
+    'catalog/read': get: {}
+    'catalog/feed': get: {}
+    'catalog/list': list: {}
+    'catalog/delete': post: {}

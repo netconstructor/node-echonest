@@ -48,8 +48,8 @@ vows.describe('artist methods').addBatch({
         paulaFamiliarity = results.paula.artist.familiarity
         assert beholdFamiliarity < paulaFamiliarity
       'we see no errors': (err, results) ->
-        checkErrors(err, results['paula'])
-        checkErrors(err, results['behold'])
+        checkErrors err, results['paula']
+        checkErrors err, results['behold']
     "to search for the hotttness of justin timberlake":
       topic: (nest) ->
         nest.artist.hotttnesss {
