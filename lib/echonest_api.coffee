@@ -27,4 +27,6 @@ module.exports =
     'artist/urls': get: {}
     'artist/video': get: {}
 
+    'track/analyze': post: {}
+    'track/profile': get: {}
     'track/upload': post: {}
