@@ -17,7 +17,7 @@
     "node": "*"
   },
   "author": "Brendan Adamson <brendan.adamson@gmail.com> (https://github.com/badamson)",
-  "description": "node.js client for the echonest api",
+  "description": "node.js client for the echonest api written in coffeescript",
   "homepage": "https://github.com/badamson/node-echonest",
   "repository": {
     "type": "git",
