@@ -36,7 +36,7 @@ output:
             id: 'ARJVTD81187FB51621',
             name: 'Portishead' } }
 
-The tests touch every API endpoint--including [/track/upload](http://developer.echonest.com/docs/v4/track.html#upload)--so [see them](https://github.com/badamson/node-echonest/tree/master/test/v4) for real examples. They're in [coffeescript](http://coffeescript.org/). You'll also need to visit the [Echonest API Documentation](http://developer.echonest.com/docs/v4) to see what parameters each method accepts and what to expect in the response.
+The tests touch every API endpoint--including uploading a tune to [](http://developer.echonest.com/docs/v4/track.html#upload)--so [see them](https://github.com/badamson/node-echonest/tree/master/test/v4) for real examples. They're in [coffeescript](http://coffeescript.org/). You'll also need to visit the [Echonest API Documentation](http://developer.echonest.com/docs/v4) to see what parameters each method accepts and what to expect in the response.
 
 There's some pretty neat stuff in [playlist generation](http://developer.echonest.com/docs/v4/playlist.html#static) (echonest is used by Spotify radio) and [song search](http://developer.echonest.com/docs/v4/song.html#search).
 
@@ -49,3 +49,133 @@ Contributing
 * run the tests -- `rake test`
 
 The echonest.js file distributed by npm is generated, and not checked into the repository. To see it, run `rake build`.
+
+echonest.js is very new. It could use some fancier handling of [echonest's response codes](http://developer.echonest.com/docs/v4/index.html#response-codes). It could also probably work outside node.js in a browser without too much work.
+
+Exploring
+---------
+
+The default callback logs errors and responses, so it's possible to dig around in the coffeescript repl:
+
+    coffee> echonest = require 'echonest'
+    { Echonest: [Function: Echonest] }
+    coffee> mynest = new echonest.Echonest
+    { api_key: 'QQKP1N3XKJO7YTSRS',
+      api_version: 'v4',
+      host: 'http://developer.echonest.com',
+      jsonclient: {},
+      song:
+       { search: [Function],
+         profile: [Function],
+         identify: [Function] },
+      artist:
+       { biographies: [Function],
+         blogs: [Function],
+         familiarity: [Function],
+         hotttnesss: [Function],
+         images: [Function],
+         list_terms: [Function],
+         news: [Function],
+         profile: [Function],
+         reviews: [Function],
+         search: [Function],
+         extract: [Function],
+         songs: [Function],
+         similar: [Function],
+         suggest: [Function],
+         terms: [Function],
+         top_hottt: [Function],
+         top_terms: [Function],
+         twitter: [Function],
+         urls: [Function],
+         video: [Function] },
+      track:
+       { analyze: [Function],
+         profile: [Function],
+         upload: [Function] },
+      playlist:
+       { basic: [Function],
+         static: [Function],
+         dynamic: [Function],
+         session_info: [Function] },
+      catalog:
+       { create: [Function],
+         update: [Function],
+         status: [Function],
+         profile: [Function],
+         read: [Function],
+         feed: [Function],
+         list: [Function],
+         delete: [Function] } }
+    coffee> mynest.song.search(sort: 'loudness-desc', max_latitude: 0, key: 'd', mode: 0) # loudest songs from the southern hemisphere in d minor
+    err:  [Error: Bad status code from server: 400]
+    data:  { status:
+       { version: '4.2',
+         code: 5,
+         message: 'key - Invalid value for parameter: "key" must be a whole number' } }
+    
+    coffee> mynest.song.search(sort: 'loudness-desc', max_latitude: 0, key: 2, mode: 0) # loudest songs from the southern hemisphere in d minor
+    err:  null
+    data:  { status: { version: '4.2', code: 0, message: 'Success' },
+      songs:
+       [ { artist_id: 'AROJN321187B9A1967',
+           id: 'SOHSSIY12D8578F65A',
+           artist_name: 'Sissy Spacek',
+           title: 'Bone Flour' },
+         { artist_id: 'ARYSZJY1187B9AA68B',
+           id: 'SOYQFVQ131343A55FE',
+           artist_name: 'Prurient',
+           title: 'Troubled Sleep' },
+         { artist_id: 'ARG1JWO1187B993356',
+           id: 'SOZZDMT12A8C145013',
+           artist_name: 'Massimo',
+           title: 'Hello Dirty 1' },
+         { artist_id: 'ARTG2FK1187B99A5B2',
+           id: 'SODBQCA12AB0183BA2',
+           artist_name: 'Landed',
+           title: 'FM 91.1' },
+         { artist_id: 'ARWDKKI130D26542D8',
+           id: 'SOMGUYA131F71D6F1A',
+           artist_name: 'Fucked',
+           title: 'Lloyd+Robbie3' },
+         { artist_id: 'AREBLP31187FB4F35F',
+           id: 'SOKJANR13152A73068',
+           artist_name: 'Merzbow',
+           title: 'Minotaurus' },
+         { artist_id: 'ARCMHNT12F54FADAC1',
+           id: 'SOBOEME130516E3532',
+           artist_name: 'Wenaki',
+           title: 'Velocity' },
+         { artist_id: 'ARCMHNT12F54FADAC1',
+           id: 'SOYSVXP1316771415E',
+           artist_name: 'Wenaki',
+           title: 'Velocity' },
+         { artist_id: 'AR1D1ML1187B98C004',
+           id: 'SOMEYIT130516E0457',
+           artist_name: 'Gerritt & John Wiese',
+           title: 'Untitled' },
+         { artist_id: 'AR1D1ML1187B98C004',
+           id: 'SOLNVGU12D9F521519',
+           artist_name: 'Gerritt & John Wiese',
+           title: 'Untitled' },
+         { artist_id: 'AR1D1ML1187B98C004',
+           id: 'SOQJPAN13134386EFE',
+           artist_name: 'Gerritt & John Wiese',
+           title: 'Untitled' },
+         { artist_id: 'ARTPWDY11C8A416B06',
+           id: 'SOUECOP131343A19BA',
+           artist_name: 'Faux Pride',
+           title: 'YouSuckDotCom' },
+         { artist_id: 'ARUCSL71187B98EC94',
+           id: 'SOSUCKF12AB018AA36',
+           artist_name: 'Jason Crumer',
+           title: 'III. Betrayal After Betrayal' },
+         { artist_id: 'ARXMWHU122C86777D1',
+           id: 'SOOYLHL130516DD3AD',
+           artist_name: 'Big Deformed Head',
+           title: 'Most Triumphant Motherfucker...and I Use the Term Triumphant Loo' },
+         { artist_id: 'ARMBMKW1187FB5A735',
+           id: 'SOBFKVK12AF7299AB9',
+           artist_name: 'Autotrash',
+           title: 'Sex Ape' } ] }
+    
