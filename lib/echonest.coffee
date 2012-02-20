@@ -40,7 +40,7 @@ class echonest.Echonest
     if method == 'get'
       client = client(query)
     # console.log client() # to show url
-    wrapper = (err, result) ->
+    wrapper = (err, result) =>
       callback ?= @defaultCallback
       # pluck response
       if result.response?

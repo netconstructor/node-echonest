@@ -3,11 +3,28 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "fermata": "",
+    "underscore": ""
+  },
+  "devDependencies": {
     "async": ">= 0.1.15",
     "coffee-script": "",
     "coffeelint": "",
-    "underscore": "",
-    "vows": ""
+    "vows": "",
     "promised-io": ""
+  },
+  "engines": {
+    "node": "*"
+  },
+  "author": "Brendan Adamson <brendan.adamson@gmail.com> (https://github.com/badamson)",
+  "description": "node.js client for the echonest api",
+  "homepage": "https://github.com/badamson/node-echonest",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/badamson/node-echonest.git"
+  },
+  "main": "dist/echonest.js",
+  "scripts": {
+    "test": "rake test"
   }
 }
