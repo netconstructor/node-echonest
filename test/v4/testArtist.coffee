@@ -6,8 +6,8 @@ util = require '../util'
 
 checkErrors = util.checkErrors
 
-# FIXME: some callbacks across all tests take data arg, should be changed to results
-# for consistency
+# FIXME: some callbacks across all tests take data arg
+# should be response
 
 vows.describe('artist methods').addBatch({
   'when using echonest':
