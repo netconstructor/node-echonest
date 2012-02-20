@@ -1,7 +1,7 @@
 echonest.js
 =============
 
-A node.js client for the [Echonest API](http://developer.echonest.com/docs/v4/)
+A complete node.js client for the [Echonest API](http://developer.echonest.com/docs/v4/).
 
 Installation
 ------------
@@ -15,37 +15,28 @@ To use it with node:
     echonest = require('echonest');
     var myNest = new echonest.Echonest();
 
-    myNest.song.search({
-        title: 'biscuit',
-        artist: 'portishead'
+    myNest.artist.familiarity({
+        name: 'portishead'
     }, function (error, response) {
-        if (error) console.log(error);
-        console.log(response);
+        if (error) {
+            console.log(error, response);
+        } else {
+            console.log('familiarity:', response.artist.familiarity);
+            // see the whole response
+            console.log('response:', response);
+        }
     });
 
 output:
 
-    { status: { version: '4.2', code: 0, message: 'Success' },
-      songs: 
-       [ { artist_id: 'ARJVTD81187FB51621',
-           id: 'SOSYJJL12B0B80B28D',
-           artist_name: 'Portishead',
-           title: 'Biscuit' } ] }
+    familiarity: 0.8310873556337086
+    response: { status: { version: '4.2', code: 0, message: 'Success' },
+        artist: 
+    { familiarity: 0.8310873556337086,
+            id: 'ARJVTD81187FB51621',
+            name: 'Portishead' } }
 
-### example usage in coffeescript
-
-    echonest = require 'echonest'
-    myNest = new echonest.Echonest
-
-    myNest.song.search {
-        title: 'biscuit',
-        artist: 'portishead'
-    }, (error, response) ->
-        if error
-          console.log error
-        console.log response
-
-The tests touch every API endpoint (not true yet!), so [see them](https://github.com/badamson/node-echonest/tree/master/test/v4) for more.
+The tests touch every API endpoint (not true yet!), so [see them](https://github.com/badamson/node-echonest/tree/master/test/v4) for real examples. They're in [coffeescript](http://coffeescript.org/). You'll also need to visit the [Echonest API Documentation](http://developer.echonest.com/docs/v4) to see what parameters each method accepts and what to expect in the response.
 
 Contributing
 ------------
