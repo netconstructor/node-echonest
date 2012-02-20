@@ -45,3 +45,5 @@ Contributing
 * install dev dependencies -- `npm install`
 * install [rake](http://rubygems.org/gems/rake)
 * run the tests -- `rake test`
+
+The echonest.js file distributed by npm is generated, and not checked into the repository. To see it, run `rake build`.
