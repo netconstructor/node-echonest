@@ -10,10 +10,14 @@ To use it with node:
 
     npm install echonest
 
+Get [an API key](http://developer.echonest.com/docs/v4/#keys).
+
 ### example usage in javascript
 
     echonest = require('echonest');
-    var myNest = new echonest.Echonest();
+    var myNest = new echonest.Echonest({
+        api_key: 'XXX YOUR API KEY XXX'
+    });
 
     myNest.artist.familiarity({
         name: 'portishead'
@@ -36,9 +40,9 @@ output:
             id: 'ARJVTD81187FB51621',
             name: 'Portishead' } }
 
-The tests touch every API endpoint--including uploading a tune to [](http://developer.echonest.com/docs/v4/track.html#upload)--so [see them](https://github.com/badamson/node-echonest/tree/master/test/v4) for real examples. They're in [coffeescript](http://coffeescript.org/). You'll also need to visit the [Echonest API Documentation](http://developer.echonest.com/docs/v4) to see what parameters each method accepts and what to expect in the response.
+The tests touch every endpoint of the live API--including uploading a tune to [track/upload](http://developer.echonest.com/docs/v4/track.html#upload)--so [see them](https://github.com/badamson/node-echonest/tree/master/test/v4) for real examples. They're in [coffeescript](http://coffeescript.org/). You'll also need to visit the [Echonest API Documentation](http://developer.echonest.com/docs/v4) to see what parameters each method accepts and what to expect in the response.
 
-There's some pretty neat stuff in [playlist generation](http://developer.echonest.com/docs/v4/playlist.html#static) (echonest is used by Spotify radio) and [song search](http://developer.echonest.com/docs/v4/song.html#search).
+There's some pretty neat stuff in [playlist generation](http://developer.echonest.com/docs/v4/playlist.html#static) (echonest is used by [Spotify radio](http://venturebeat.com/2011/12/16/echo-nest-spotify/)) and [song search](http://developer.echonest.com/docs/v4/song.html#search).
 
 Contributing
 ------------
@@ -48,19 +52,19 @@ Contributing
 * install [rake](http://rubygems.org/gems/rake)
 * run the tests -- `rake test`
 
-The echonest.js file distributed by npm is generated, and not checked into the repository. To see it, run `rake build`.
+The echonest.js file distributed by npm is generated from coffeescript, and not checked into the repository. To see it, run `rake build`.
 
-echonest.js is very new. It could use some fancier handling of [echonest's response codes](http://developer.echonest.com/docs/v4/index.html#response-codes). It could also probably work outside node.js in a browser without too much work.
+It's very new, clould be cleaned up and could use some fancier handling of [echonest's response codes](http://developer.echonest.com/docs/v4/index.html#response-codes). It could also probably work outside node.js in a browser without too much work.
 
 Exploring
 ---------
 
-The default callback logs errors and responses, so it's possible to dig around in the coffeescript repl:
+The default callback logs errors and responses. These are the loudest 15 songs from the southern hemisphere in d minor (the saddest of all keys), from the coffeescript repl:
 
     coffee> echonest = require 'echonest'
     { Echonest: [Function: Echonest] }
-    coffee> mynest = new echonest.Echonest
-    { api_key: 'QQKP1N3XKJO7YTSRS',
+    coffee> mynest = new echonest.Echonest(api_key: 'XXX')
+    { api_key: 'XXX',
       api_version: 'v4',
       host: 'http://developer.echonest.com',
       jsonclient: {},
@@ -107,14 +111,15 @@ The default callback logs errors and responses, so it's possible to dig around i
          feed: [Function],
          list: [Function],
          delete: [Function] } }
-    coffee> mynest.song.search(sort: 'loudness-desc', max_latitude: 0, key: 'd', mode: 0) # loudest songs from the southern hemisphere in d minor
+    coffee> # loudest songs from the southern hemisphere in d minor
+    coffee> mynest.song.search(sort: 'loudness-desc', max_latitude: 0, key: 'd', mode: 0) 
     err:  [Error: Bad status code from server: 400]
     data:  { status:
        { version: '4.2',
          code: 5,
          message: 'key - Invalid value for parameter: "key" must be a whole number' } }
-    
-    coffee> mynest.song.search(sort: 'loudness-desc', max_latitude: 0, key: 2, mode: 0) # loudest songs from the southern hemisphere in d minor
+    coffee> # loudest songs from the southern hemisphere in d minor, take 2
+    coffee> mynest.song.search(sort: 'loudness-desc', max_latitude: 0, key: 2, mode: 0)
     err:  null
     data:  { status: { version: '4.2', code: 0, message: 'Success' },
       songs:
@@ -178,4 +183,3 @@ The default callback logs errors and responses, so it's possible to dig around i
            id: 'SOBFKVK12AF7299AB9',
            artist_name: 'Autotrash',
            title: 'Sex Ape' } ] }
-    
