@@ -3,7 +3,7 @@ echonest.js
 
 A node.js client for the [Echonest API](http://developer.echonest.com/docs/v4/).
 
-[![Build Status](https://secure.travis-ci.org/badamson/node-echonest.png)](http://travis-ci.org/badamson/node-echonest)
+[![Build Status](https://secure.travis-ci.org/badamson/node-echonest.png?branch=master)](http://travis-ci.org/badamson/node-echonest)
 
 Installation
 ------------
