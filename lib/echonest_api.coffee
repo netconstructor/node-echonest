@@ -4,7 +4,7 @@ module.exports =
   'v4':
     'song/search': get: {}
     'song/profile': get: {}
-    #'/song/identify': {get: {}} # POST?!
+    'song/identify': post: {}
     'artist/biographies': get: {}
     'artist/blogs': get: {}
     'artist/familiarity': get: {}

@@ -14,6 +14,7 @@ vows.describe('artist methods').addBatch({
         nest.artist.biographies {
           name: 'spin doctors'
         }, @callback
+        undefined
       'the first result mentions New York': (err, data) ->
         bioText = data.biographies[0].text
         assert.include bioText, 'New York'
@@ -23,6 +24,7 @@ vows.describe('artist methods').addBatch({
         nest.artist.blogs {
           name: 'behold... the arctopus'
         }, @callback
+        undefined
       'the first result has a url': (err, data) ->
         firstURL = data.blogs[0].url
         assert.include firstURL, 'http'
@@ -37,6 +39,7 @@ vows.describe('artist methods').addBatch({
             name: 'paula abdul'
           }, callback
         }, @callback)
+        undefined
       'behold is less familiar than paula': (err, results) ->
         beholdFamiliarity = results.behold.artist.familiarity
         paulaFamiliarity = results.paula.artist.familiarity

@@ -1,7 +1,7 @@
 echonest.js
 =============
 
-A complete node.js client for the [Echonest API](http://developer.echonest.com/docs/v4/).
+A node.js client for the [Echonest API](http://developer.echonest.com/docs/v4/).
 
 Installation
 ------------
@@ -36,7 +36,7 @@ output:
             id: 'ARJVTD81187FB51621',
             name: 'Portishead' } }
 
-The tests touch every API endpoint (not true yet!), so [see them](https://github.com/badamson/node-echonest/tree/master/test/v4) for real examples. They're in [coffeescript](http://coffeescript.org/). You'll also need to visit the [Echonest API Documentation](http://developer.echonest.com/docs/v4) to see what parameters each method accepts and what to expect in the response.
+The tests touch every API endpoint (not true yet!), including [/track/upload](http://developer.echonest.com/docs/v4/track.html#upload), so [see them](https://github.com/badamson/node-echonest/tree/master/test/v4) for real examples. They're in [coffeescript](http://coffeescript.org/). You'll also need to visit the [Echonest API Documentation](http://developer.echonest.com/docs/v4) to see what parameters each method accepts and what to expect in the response.
 
 Contributing
 ------------
