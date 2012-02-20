@@ -39,7 +39,9 @@ vows.describe('catalog methods').addBatch({
               id: id
             }, callback
           # get ids of just test catalogs
-          ids = (catalog.id for catalog in response.catalogs when /test catalog/.test(catalog.name))
+          isTestCatalog = (name) -> /test catalog/.test(name)
+          ids = for catalog in response.catalogs when isTestCatalog catalog.name
+            catalog.id
           deletes = {}
           for id in ids
             deletes[id] = do (id) -> (callback) ->

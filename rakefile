@@ -11,7 +11,7 @@ task :default => :test
 
 desc "run coffeelint"
 task :coffeelint do
-    sh "find src test -name '*.coffee' | xargs coffeelint"
+    sh "find lib test -name '*.coffee' | xargs node_modules/.bin/coffeelint -f etc/coffeelint.json"
 end
 
 desc "run vows tests"

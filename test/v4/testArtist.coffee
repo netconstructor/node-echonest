@@ -107,10 +107,12 @@ vows.describe('artist methods').addBatch({
         # artists is a list, but obj in doc
         assert.ok response.artists[0].name.length > 0
       'we see no errors': checkErrors
-    "to extract names from 'behold... the arctopus pickle beatles computer jesus refrigerator'":
+    "to extract names from 'behold... the arctopus pickle beatles
+        computer jesus refrigerator'":
       topic: (nest) ->
         nest.artist.extract {
-          text: 'behold... the arctopus pickle beatles computer jesus refrigerator'
+          text: 'behold... the arctopus pickle beatles
+            computer jesus refrigerator'
         }, @callback
         undefined
       'we get the beatles': (err, response) ->
@@ -193,7 +195,8 @@ vows.describe('artist methods').addBatch({
         }, @callback
         undefined
       'we get his wikipedia page': (err, response) ->
-        assert.equal response.urls.wikipedia_url, 'http://en.wikipedia.org/wiki/Justin_Bieber'
+        assert.equal response.urls.wikipedia_url,
+          'http://en.wikipedia.org/wiki/Justin_Bieber'
       'we see no errors': checkErrors
     "to search for justin bieber video":
       topic: (nest) ->

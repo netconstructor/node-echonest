@@ -8,7 +8,8 @@ util = require '../util'
 checkErrors = util.checkErrors
 
 koenjiSong =
-  filename: 'test/data/koenjihyakkei-mederro-passquirr-sample-supercompressed.mp3'
+  filename:
+    'test/data/koenjihyakkei-mederro-passquirr-sample-supercompressed.mp3'
   md5: '03ba8a2e60426497549218321d64829e'
   artistIncludes: "Koenji"
   titleIncludes: "Mederro"
