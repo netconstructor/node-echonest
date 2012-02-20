@@ -5,10 +5,11 @@ module.exports =
     'song/search': get: {}
     'song/profile': get: {}
     'song/identify': post: {}
+
     'artist/biographies': get: {}
     'artist/blogs': get: {}
     'artist/familiarity': get: {}
-    'artist/hotttness': get: {}
+    'artist/hotttnesss': get: {}
     'artist/images': get: {}
     'artist/list_terms': get: {}
     'artist/news': get: {}
@@ -25,4 +26,5 @@ module.exports =
     'artist/twitter': get: {}
     'artist/urls': get: {}
     'artist/video': get: {}
+
     'track/upload': post: {}

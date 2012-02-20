@@ -6,6 +6,9 @@ util = require '../util'
 
 checkErrors = util.checkErrors
 
+# FIXME: some callbacks across all tests take data arg, should be changed to results
+# for consistency
+
 vows.describe('artist methods').addBatch({
   'when using echonest':
     topic: new echonest.Echonest
@@ -47,4 +50,13 @@ vows.describe('artist methods').addBatch({
       'we see no errors': (err, results) ->
         checkErrors(err, results['paula'])
         checkErrors(err, results['behold'])
+    "to search for the hotttness of justin timberlake":
+      topic: (nest) ->
+        nest.artist.hotttnesss {
+          name: 'justin timberlake'
+        }, @callback
+        undefined
+      'his hotttnesss exceeds 0.01': (err, response) ->
+        assert.ok response.artist.hotttnesss > 0.01
+      'we see no errors': checkErrors
 }).export(module)
