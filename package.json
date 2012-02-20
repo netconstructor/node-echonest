@@ -25,6 +25,6 @@
   },
   "main": "dist/echonest.js",
   "scripts": {
-    "test": "rake test"
+    "test": "find test -name 'test*.coffee' | xargs node_modules/.bin/vows --spec"
   }
 }
