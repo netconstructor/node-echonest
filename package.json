@@ -24,7 +24,9 @@
     "url": "git://github.com/badamson/node-echonest.git"
   },
   "main": "dist/echonest.js",
+  "keywords": ["echonest"],
   "scripts": {
+    "prepublish": "rake build",
     "test": "find test -name 'test*.coffee' | xargs node_modules/.bin/vows --spec"
   }
 }

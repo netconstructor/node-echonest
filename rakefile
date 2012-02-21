@@ -31,11 +31,11 @@ SRC.each do |srccoffee|
     compiledjs = File.join(BUILDDIR, File.basename(srccoffee).ext('js'))
     task :build => [compiledjs]
     file compiledjs => [BUILDDIR, srccoffee] do
-        sh "coffee -o #{BUILDDIR} -c #{srccoffee}" 
+        sh "node_modules/.bin/coffee -o #{BUILDDIR} -c #{srccoffee}" 
     end
 end
 
 desc "publish to npm"
-task :publish => [:build] do
+task :publish do
     sh "npm publish"
 end
