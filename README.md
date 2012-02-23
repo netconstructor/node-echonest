@@ -56,7 +56,7 @@ Contributing
 
 The echonest.js file distributed by npm is generated from coffeescript, and not checked into the repository. To see it, run `rake build`.
 
-It's very new, clould be cleaned up and could use some fancier handling of [echonest's response codes](http://developer.echonest.com/docs/v4/index.html#response-codes). It could also probably work outside node.js in a browser without too much work. It's missing some of the slicker stuff from [other client libraries](http://developer.echonest.com/client_libraries.html).
+It could use some fancier handling of [echonest's response codes](http://developer.echonest.com/docs/v4/index.html#response-codes). It could also probably work outside node.js in a browser without too much work. It's missing some of the slicker stuff from [other client libraries](http://developer.echonest.com/client_libraries.html).
 
 Exploring
 ---------

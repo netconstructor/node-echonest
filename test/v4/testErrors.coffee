@@ -38,7 +38,7 @@ vows.describe('error tests').addBatch({
       topic: (nest) ->
         # fake endpoint, but specified in echonest_api.coffee
         # under bogusVersion
-        nest.totally.fake.endpoint {}, @callback # no parameters
+        nest.fake.endpoint {}, @callback # no parameters
         undefined
       'we see a 502': (err, data) ->
         assert.equal err.message, 'Bad status code from server: 502'

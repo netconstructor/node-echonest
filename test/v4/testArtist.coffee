@@ -103,8 +103,6 @@ vows.describe('artist methods').addBatch({
         }, @callback
         undefined
       'we get someone': (err, response) ->
-        # FIXME: the example response documentation is wrong
-        # artists is a list, but obj in doc
         assert.ok response.artists[0].name.length > 0
       'we see no errors': checkErrors
     "to extract names from 'behold... the arctopus pickle beatles

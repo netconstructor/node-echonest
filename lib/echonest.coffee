@@ -17,18 +17,13 @@ class echonest.Echonest
 
     @jsonclient = fermata.json(@host)['api'][@api_version](api_key: @api_key)
     api = echonest_api[@api_version]
-    for endpoint, httpMethods of api
-      httpMethod = httpMethods.post? and 'post' or 'get' # FIXME good enough?
-      # build objects on @ from api endpoints, assign functions
-      # wrapping request to endpoint
-      # FIXME: clean this mess up
-      path = endpoint.split('/')
-      [beforeTip, tip] = [path[...-1], path[-1...]]
-      _.reduce(beforeTip, (memo, x) ->
-        memo[x] ||= {}
-      , @)[tip] = do (endpoint, httpMethod) =>
+    for endpoint, httpmethod of api
+      # echonest is always just /type/method
+      [type, method] = endpoint.split('/')
+      @[type] ?= {}
+      @[type][method] ?= do (endpoint, httpmethod) =>
         (query, callback) =>
-          @request(endpoint, query, callback, httpMethod)
+          @request(endpoint, query, callback, httpmethod)
 
   defaultCallback: (err, data) ->
     console.log 'err: ', err
@@ -43,7 +38,7 @@ class echonest.Echonest
     wrapper = (err, result) =>
       callback ?= @defaultCallback
       # pluck response
-      if result.response?
+      if result?.response?
         result = result.response
       callback err, result
     switch method
