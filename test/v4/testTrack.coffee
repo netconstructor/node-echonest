@@ -35,7 +35,7 @@ vows.describe('track methods').addBatch({
         nest.track.profile {
           md5: koenjiSong.md5
         }, @callback
-        undefined # async topics must return undefined
+        undefined
       'it is correctly identified': (err, data) ->
         matchesKoenji data
       'we see no errors': checkErrors
@@ -45,7 +45,7 @@ vows.describe('track methods').addBatch({
           nest.track.upload {
             track: {data: filebuffer}, filetype: 'mp3'
           }, @callback
-        undefined # async topics must return undefined
+        undefined
       'it is correctly identified': (err, data) ->
         matchesKoenji data
       'we see no errors': checkErrors

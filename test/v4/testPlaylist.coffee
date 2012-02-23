@@ -1,6 +1,4 @@
-fs = require("promised-io/fs")
 assert   = require 'assert'
-async   = require 'async'
 vows     = require 'vows'
 echonest = require '../../lib/echonest'
 util = require '../util'
@@ -53,15 +51,5 @@ vows.describe('playlist methods').addBatch({
           }, @callback
         'and there are no skipped songs': (err, response) ->
           assert.isEmpty response.skipped_songs
-      'we see no errors': checkErrors
-    "to create a static artist-radio playlist from behold... the arctopus":
-      topic: (nest) ->
-        nest.playlist.basic {
-          artist: "behold... the arctopus"
-          type: "artist-radio"
-        }, @callback
-        undefined
-      'i get some tunes': (err, response) ->
-        assert.ok response.songs.length > 1
       'we see no errors': checkErrors
 }).export module

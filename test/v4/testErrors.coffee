@@ -42,12 +42,6 @@ vows.describe('error tests').addBatch({
         undefined
       'we see a 502': (err, data) ->
         assert.equal err.message, 'Bad status code from server: 502'
-      'we see echonest status code 4': (err, data) ->
         # this is from nginx, looks different
         assert.equal data.status, 502
-  # 'when using echonest':
-  #   topic: new echonest.Echonest()
-  #   "to pummel their servers until we hit the rate limit":
-  #     'just kidding': (nest) ->
-  #       assert.instanceOf nest, echonest.Echonest
 }).export module
