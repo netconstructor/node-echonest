@@ -3,6 +3,7 @@ fermata = require 'fermata'
 querystring = require 'querystring'
 
 echonest_api = require './echonest_api'
+rate_limit = require './rate_limit'
 
 module.exports = echonest = {}
 
@@ -12,8 +13,12 @@ class echonest.Echonest
       api_key: 'QQKP1N3XKJO7YTSRS'
       api_version: 'v4'
       host: 'http://developer.echonest.com'
+      rate_limit: null
     }
     _.extend @, options
+
+    if options.rate_limit
+      @rateLimiter = new rate_limit.RateLimiter options.rate_limit
 
     @jsonclient = fermata.json(@host)['api'][@api_version](api_key: @api_key)
     api = echonest_api[@api_version]
@@ -23,7 +28,11 @@ class echonest.Echonest
       @[type] ?= {}
       @[type][method] ?= do (endpoint, httpmethod) =>
         (query, callback) =>
-          @request(endpoint, query, callback, httpmethod)
+          if not options.rate_limit
+              @request(endpoint, query, callback, httpmethod)
+          else
+            @rateLimiter.addTask =>
+              @request(endpoint, query, callback, httpmethod)
 
   defaultCallback: (err, data) ->
     console.log 'err: ', err
@@ -42,7 +51,7 @@ class echonest.Echonest
         result = result.response
       # put echonest status in the error
       if err and result
-        err = new Error (err + JSON.stringify result)
+        err = new Error (err + ': ' + JSON.stringify result)
       callback err, result
     switch method
       when 'get' then client.get(wrapper)

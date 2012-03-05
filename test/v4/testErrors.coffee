@@ -15,7 +15,7 @@ vows.describe('error tests').addBatch({
         undefined
       'we see a 400': (err, data) ->
         # this comes from fermata
-        assert.equal err.message, 'Bad status code from server: 400'
+        assert.include err.message, '400'
       'we see an error about a bad api_key': (err, data) ->
         assert.include data.status.message, 'api_key'
       'we see echonest status code 1': (err, data) ->
@@ -41,7 +41,7 @@ vows.describe('error tests').addBatch({
         nest.fake.endpoint {}, @callback # no parameters
         undefined
       'we see a 502': (err, data) ->
-        assert.equal err.message, 'Bad status code from server: 502'
+        assert.include err.message, '502'
         # this is from nginx, looks different
         assert.equal data.status, 502
 }).export module
