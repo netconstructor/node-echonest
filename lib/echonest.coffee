@@ -40,6 +40,9 @@ class echonest.Echonest
       # pluck response
       if result?.response?
         result = result.response
+      # put echonest status in the error
+      if err and result
+        err = new Error (err + JSON.stringify result)
       callback err, result
     switch method
       when 'get' then client.get(wrapper)
