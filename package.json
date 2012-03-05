@@ -1,6 +1,6 @@
 {
   "name": "echonest",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "dependencies": {
     "fermata": "",
@@ -10,8 +10,7 @@
     "async": ">= 0.1.15",
     "coffee-script": "",
     "coffeelint": "",
-    "vows": "",
-    "promised-io": ""
+    "vows": ""
   },
   "engines": {
     "node": "*"

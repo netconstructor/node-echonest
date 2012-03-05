@@ -1,4 +1,4 @@
-fs = require("promised-io/fs")
+fs = require 'fs'
 assert   = require 'assert'
 async   = require 'async'
 vows     = require 'vows'
@@ -41,10 +41,10 @@ vows.describe('track methods').addBatch({
       'we see no errors': checkErrors
     "to post a koenjihyakkei tune to /track/upload":
       topic: (nest) ->
-        fs.readFile(koenjiSong.filename).then (filebuffer) =>
-          nest.track.upload {
-            track: {data: filebuffer}, filetype: 'mp3'
-          }, @callback
+        filebuffer = fs.readFileSync(koenjiSong.filename)
+        nest.track.upload {
+          track: {data: filebuffer}, filetype: 'mp3'
+        }, @callback
         undefined
       'it is correctly identified': (err, data) ->
         matchesKoenji data
