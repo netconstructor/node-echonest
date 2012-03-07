@@ -5,10 +5,11 @@ util = require '../util'
 
 checkErrors = util.checkErrors
 
-vows.describe('song methods').addBatch({
+vows.describe('multibucket support').addBatch({
   'when using echonest':
     topic: new echonest.Echonest
-    "to search for soul to squeeze with multiple buckets: audio_summary, track, id:rdio":
+    "to search for soul to squeeze with multiple buckets:
+        audio_summary, track, id:rdio":
       topic: (nest) ->
         nest.song.search {
           title: 'soul to squeeze'
