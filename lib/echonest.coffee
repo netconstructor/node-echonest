@@ -20,7 +20,9 @@ class echonest.Echonest
     if options.rate_limit
       @rateLimiter = new rate_limit.RateLimiter options.rate_limit
 
-    @jsonclient = fermata.json(@host)['api'][@api_version](api_key: @api_key)
+    # using fermata for its multipart/form-data POST support
+    @jsonclient = fermata.json(@host)['api'][@api_version]
+    @baseQuery = api_key: @api_key
     api = echonest_api[@api_version]
     for endpoint, httpmethod of api
       # echonest is always just /type/method
@@ -29,7 +31,7 @@ class echonest.Echonest
       @[type][method] ?= do (endpoint, httpmethod) =>
         (query, callback) =>
           if not options.rate_limit
-              @request(endpoint, query, callback, httpmethod)
+            @request(endpoint, query, callback, httpmethod)
           else
             @rateLimiter.addTask =>
               @request(endpoint, query, callback, httpmethod)
@@ -41,8 +43,15 @@ class echonest.Echonest
   request: (endpoint, query, callback, method = 'get') ->
     # callback is called with (err, data)
     client = @jsonclient([endpoint])
+    query = _.defaults query, @baseQuery
     if method == 'get'
-      client = client(query)
+      # multibucket hack, fermata doesn't support
+      # array values like querystring.stringify
+      # should just be client = client(query)
+      url = do client
+      requestQueryString = '?' + querystring.stringify query
+      client = fermata.json url + requestQueryString
+
     # console.log client() # to show url
     wrapper = (err, result) =>
       callback ?= @defaultCallback

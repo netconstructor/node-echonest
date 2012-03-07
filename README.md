@@ -42,6 +42,8 @@ output:
             id: 'ARJVTD81187FB51621',
             name: 'Portishead' } }
 
+To search with multiple buckets (or descriptions, styles, moods), [use an array](https://github.com/badamson/node-echonest/blob/master/test/v4/testMultibucket.coffee): `style: ['lounge', 'metal']`.
+
 The tests touch every endpoint of the live API--including uploading a tune to [track/upload](http://developer.echonest.com/docs/v4/track.html#upload)--so [see them](https://github.com/badamson/node-echonest/tree/master/test/v4) for real examples. They're in [coffeescript](http://coffeescript.org/). You'll also need to visit the [Echonest API Documentation](http://developer.echonest.com/docs/v4) to see what parameters each method accepts and what to expect in the response.
 
 There's some pretty neat stuff in [playlist generation](http://developer.echonest.com/docs/v4/playlist.html#static) (echonest is used by [Spotify radio](http://venturebeat.com/2011/12/16/echo-nest-spotify/)) and [song search](http://developer.echonest.com/docs/v4/song.html#search).
